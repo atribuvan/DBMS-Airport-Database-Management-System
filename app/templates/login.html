@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="styles.css">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .background {
+        background-color: #f3f7fd;
+    }
+
+    header {
+        padding: 0;
+        margin: 0;
+    }
+
+    main {
+        padding-top: 0px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="container-fluid background">
+        <div class="row">
+                
+                <!-- Form Column -->
+                <div class="col-5">
+                    <form action="{% url 'logged' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-2 " style="margin-top: 30px ;">
+                            <label> <h1 style="color: rgb(50, 66, 168)">Login in to</h1></label><br>
+                        </div>
+                        <div class="mb-4">
+                            <label> <h1 style="color: rgb(50, 66, 168)">Our Infinity</h1></label><br>
+                            <p class="mt-4 mb-4">Our place to manage your<b> Bookings</b> and<b> profile</b></p>
+                        </div>
+                        <div class="mb-4">
+                            <label for="name">USERNAME:</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary " style="margin-bottom: 200px;">Login</button>
+                    </form>
+                </div>
+                <div class="col-1"></div>
+                <!-- Image Column -->
+                <div class="col-6">
+                    <img class="image-fluid d-inline-block" src="{%static 'images/lpm.svg'%}" alt="none" style="margin-top: 30px ;"/>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% endblock %}

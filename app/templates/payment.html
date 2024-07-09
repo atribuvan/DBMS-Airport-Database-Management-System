@@ -1,0 +1,190 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Responsive Payment getway form design in Hindi</title>
+	<link rel="stylesheet" type="text/css" href="payment.css">
+</head>
+<style>
+	*{padding:0; margin:0; box-sizing: border-box; font-family:sans-serif;}
+header{
+	width: 100vw;
+	min-height: 100vh;
+	background: #34495e;
+	font-size: 1.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.container{
+	background: white;
+	width: 400px;
+	min-height: 500px;
+	display: flex;
+	/* justify-content:space-between; */
+	align-items: flex-start;
+	padding: 0.5rem 1.5rem;
+}
+.left{
+	flex-basis: 50%;
+}
+.right{
+	flex-basis: 50%;
+}
+form{
+	padding: 1rem;
+	/* background-color: black; */
+	width: 350px;
+	
+}
+
+h3{
+	margin-top: 1rem;
+	color:#2c3e50;
+	}
+
+#form1 input[type="text"]{
+	width: 100%;
+	padding: 0.5rem 0.7rem;
+	margin: 0.5rem 0;
+	outline: none;
+	
+}
+
+#zip{
+	display: flex;
+	margin-top: 0.5rem;
+}
+#zip select{
+	padding: 0.5rem 0.7rem;
+}
+#zip input[type="number"]{
+	padding: 0.5rem 0.7rem;
+	margin-left: 5px;	
+}
+.a{
+	padding: 0.5rem 0.7rem;
+	margin-left: 5px;	
+	margin-top: -50px;
+}
+button[type="submit"]{
+	width: 100%;
+	padding: 0.7rem 1.5rem;
+	background: #34495e;
+	color: white;
+	border: none;
+	outline: none;
+	margin-top: 1rem;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover{
+	background: #2c3e50;
+}
+.container{
+	display: flex;
+	justify-content: center;
+}
+
+
+@media only screen and (max-width: 770px){
+	.container{
+		flex-direction: column;
+	}
+	body{
+		overflow-x: hidden;
+	}
+}
+</style>
+<body>
+<header>
+	<div class="container" >
+		
+		<div class="right">
+			<h3>PAYMENT</h3>
+			<form id="form1" action="gen_ticket" method="POST">
+				{%csrf_token%}
+				Accepted Card <br>
+				<img src="{% static 'images/1.png' %}" width="100">
+				<img src="{% static 'images/2.png' %}" width="50">
+				<br><br>
+				Payment
+			<input type="text" name=""  value="₹{{totalfare}}"disabled>
+
+				Credit card number
+			<input type="text" name="" placeholder="Enter 16 digit cardnumber"  pattern="\d{16}" required>
+				
+				Exp month
+				<input type="text" name=""  placeholder="Enter Month"  pattern="^(0?[1-9]|1[0-2])$" required>
+				<div id="zip">
+					<div style="margin-right: 10px;">
+					<label>
+						<p style="margin-bottom: 8px;">
+							Exp year
+						</p>
+						<select required>
+							<option>Choose Year..</option>
+							<option selected>2022</option>
+							<option>2023</option>
+							<option>2024</option>
+							<option>2025</option>
+						</select>
+					</label>
+				</div>
+					<label>
+						Enter CVV
+						<input  type="text" class="a" name="" placeholder="CVV"   pattern="\d{3}"required>
+						
+					</label>
+					
+				</div>
+				<input type="hidden" name="flight_id" value="{{id}}">
+                <input type="hidden" name="origin" value="{{origin}}">
+                <input type="hidden" name="destination" value="{{destination}}">
+                <input type="hidden" name="starttime" value="{{arrivaltime}}">
+                <input type="hidden" name="endtime" value="{{departtime}}">
+                <input type="hidden" name="date" value="{{date}}">
+                <input type="hidden" name="day" value="{{day}}">
+                <input type="hidden" name="cost" value="{{price}}">
+				<input type="hidden" name="totalfare" value="{{totalfare}}">
+				<input type="hidden" name="clas" value="{{clas}}">
+				<input type="hidden" name="countrycode" value="{{countrycode}}">
+				<input type="hidden" name="email" value="{{email}}">
+				<input type="hidden" name="phone" value="{{phone}}">
+				<input type="hidden" name="totalpassengers" value="{{totalpassengers}}">
+				<input type="hidden" name="bid" value="{{bid}}">
+				{% comment %} <div id="passengerlist"></div> {% endcomment %}
+				{%for p in passengerlist%}
+				<input type="hidden" name="passenger_name{{ forloop.counter }}" value="{{ p.name }}">
+				<input type="hidden" name="passenger_age{{ forloop.counter }}" value="{{ p.age }}">
+				<input type="hidden" name="passenger_gender{{ forloop.counter }}" value="{{ p.gender }}">
+				{%endfor%}
+				
+				<button type="submit" >Proceed to Payment</button>
+			</form>
+			
+		</div>
+	</div>
+</header>
+{% comment %} <script>
+    let tp = {{ totalpassengers|safe }};
+    let pl = JSON.parse('{{ passengerlist|escapejs }}');
+    let passengerDiv = document.createElement('div');
+    let pld = document.getElementById('passengerlist');
+
+    for (let i = 0; i < tp; i++) {
+        passengerDiv.innerHTML = `
+            <div>
+                <span class="traveller-name">${pl[i]['name']} ${pl[i]['age']}</span>
+            </div>
+            <input type="hidden" name="passenger_name${i}" value="${pl[i]['name']}" required >
+            <input type="hidden" name="passenger_age${i}" value="${pl[i]['age']}" required >
+        `;
+        pld.appendChild(passengerDiv);
+    }
+</script> {% endcomment %}
+
+</body>
+</html>

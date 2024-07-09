@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Flight</title>
+    <style>
+        body {
+            background: url('https://www.gannett-cdn.com/-mm-/db6666e8df2ac983185a419f8c688b55df57d93b/c=0-77-1198-754/local/-/media/2016/08/17/USATODAY/USATODAY/636070542024642196-2016-07-gallery-USAT-12.jpg?width=3200&height=1680&fit=crop');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            height: 150vh;
+        }
+
+        form {
+            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: 20px;
+            height: 120vh;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-top: -10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'add_flight' %}">
+        {% csrf_token %}
+        <h2>Add Flight</h2>
+        <label for="{{ form.flight_id.id_for_label }}">Flight ID:</label>
+        {{ form.flight_id }}
+
+        <label for="{{ form.origin.id_for_label }}">Origin:</label>
+        {{ form.origin }}
+
+        <label for="{{ form.destination.id_for_label }}">Destination:</label>
+        {{ form.destination }}
+
+        <label for="{{ form.starttime.id_for_label }}">Departure Time:</label>
+        {{ form.starttime }}
+
+        <label for="{{ form.endtime.id_for_label }}">End Time:</label>
+        {{ form.endtime }}
+
+        <label for="{{ form.economy_price.id_for_label }}">Economic Fare:</label>
+        {{ form.economy_price }}
+
+        <label for="{{ form.bussiness_price.id_for_label }}">Economic Fare:</label>
+        {{ form.bussiness_price }}
+
+        <label for="{{ form.firstclass_price.id_for_label }}">Economic Fare:</label>
+        {{ form.firstclass_price }}
+
+
+        <label for="{{ form.day.id_for_label }}">Day:</label>
+        {{ form.day }}
+
+        <!-- Add more labels and inputs as needed -->
+
+        <button type="submit">Add Flight</button>
+    </form>
+</body>
+</html>

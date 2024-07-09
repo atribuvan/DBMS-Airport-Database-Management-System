@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #592b6d;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+        table, th, td {
+            border: 1px solid #3498db;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+            color: #fff;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .return-btn {
+            background: linear-gradient(to right, #30cfd0, #330867);
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold; /* Added bold font weight for the button in the header */
+        }
+        .header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Ticket Details</h1>
+        <a href="{% url 'home' %}" class="return-btn">Return to Main Menu</a>
+    </div>
+    
+    <table>
+        <tr>
+            <th>Booking Number</th>
+            <td>{{ ticket.id }}</td>
+        </tr>
+        <tr>
+            <th>Reference Number</th>
+            <td>{{ ticket.ref_no }}</td>
+        </tr>
+      
+        <tr>
+            <th>Flight</th>
+            <td>{{ ticket.flight }}</td>
+        </tr>
+        <tr>
+            <th>Departure Date</th>
+            <td>{{ ticket.flight_ddate }}</td>
+        </tr>
+        <tr>
+            <th>Total Fare</th>
+            <td>{{ ticket.total_fare }}</td>
+        </tr>
+        <tr>
+            <th>Total duration</th>
+            <td>{{ ticket.duration }}</td>
+        </tr>
+    </table>
+    <h2>Passenger Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% with passengers_list=ticket.get_passengers_list %}
+                {% for passenger in passengers_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ passenger.name }}</td>
+                        <td>{{ passenger.age }}</td>
+                        <td>{{ passenger.gender }}</td>
+                    </tr>
+                {% endfor %}
+            {% endwith %}
+        </tbody>
+    </table>
+    <a href="{% url 'booki' %}" class="return-btn" style="margin-right: 20px;">Back to Bookings</a>
+    {% if ticket.status == 'Confirmed' or ticket.status == 'Pending'  %}
+
+    <a href="{% url 'cancel_ticket' ref_no=ticket.ref_no %}" class="return-btn" style="background: linear-gradient(to right, rgb(208, 117, 48), #670808);">Cancel the ticket</a>
+   
+    
+    {% endif %}
+
+</body>
+</html>

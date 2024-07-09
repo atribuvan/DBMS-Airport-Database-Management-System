@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking Confirmation</title>
+    <!-- Add your CSS styles here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .download-ticket {
+            float: right;
+            margin-top: 20px;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            color: #333;
+        }
+        .ticket-details {
+            margin-top: 20px;
+            text-align: left;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .ticket-details h2 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .ticket-details p {
+            margin: 0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Download Ticket Option as a Colorful Button -->
+        <a class="download-ticket" href="download-ticket.pdf" download>
+            <button class="download-btn">Download Ticket</button>
+        </a>
+
+        <!-- Heading -->
+        <h1>Your Tickets Have Been Successfully Booked</h1>
+
+        <!-- Flight Ticket Details -->
+        <div class="ticket-details">
+            <h2>Flight Ticket Details</h2>
+            <p><strong>Flight Number:</strong> ABC123</p>
+            <p><strong>Departure Date:</strong> 2023-11-05</p>
+            <p><strong>Departure Time:</strong> 09:00 AM</p>
+            <p><strong>From:</strong> New York</p>
+            <p><strong>To:</strong> Los Angeles</p>
+            <p><strong>Passenger Name:</strong> John Doe</p>
+        </div>
+    </div>
+</body>
+</html>

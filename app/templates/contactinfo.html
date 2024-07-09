@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+    .shadow-box {
+         /* width: 200px; 
+         height: 200px;  */
+        background-color: #777; /* Set the background color of the div */
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Apply the shadow effect */
+        margin: 20px; /* Adjust margin to control spacing between the div and background */
+    }
+    .border-container {
+            border: 2px solid #777; /* Border color for the intersection */
+        }
+        
+        input{
+                    border-radius: 6px;
+                    padding: 6px;
+                    margin: 3px;
+                }
+    
+    form{
+        width: 100%;
+    }
+    .bk{
+        /* background-color: #f5f5ff; */
+        background-color: rgba(255, 255, 255, 0.5);
+
+    }
+    .makecentre{
+        margin: 30px;
+    }
+    h3,h2{
+       color: #4CAF50;
+    }
+    body{
+        
+        background-image: url('https://i.pinimg.com/736x/54/7a/a2/547aa2956263b26befc4e9ee27bfdc92.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+    }
+    /* #cbc7c7 */
+</style>
+<body style="background-color: rgba(0, 0, 0, 0.5) ;">
+ 
+<div class="row " style=" padding: 10px; margin: 30px 20px ; ">
+
+    <div class="col-8 ">
+       <div class="flight-details shadow-box bk" >
+        <div class="container-md  p-2 bk"  >
+            <div class="row " style="margin: 2px 8px; padding: 5px;">
+                <div class="col  " >
+                   <h3 style="font-style: italic;">Ticket details</h3> 
+                </div>
+            </div>
+            <div class="border-container"></div>
+            <div class="row " style="margin: 2px 8px; padding: 5px;">
+
+                <div class="col-md-3" style="margin: auto;" >
+                    <p>{{id}}</p>
+                
+                </div>
+                <div class="col-md-3">
+                    <p>{{arrivaltime}}</p>
+                    <p>{{day}}</p>
+                    <p>{{date}}</p>
+
+                    <p>{{origin}}</p>
+                </div>
+                <div class="col-md-3 text-center " style="margin: auto;">
+                <p class='pb-0 mb-0'></p>
+                <p class='pt-0 mt-0'>-------------></p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{departtime}}</p>
+                    <p>{{day}}</p>
+                    <p>{{date}}</p>
+
+                    <p>{{destination}}</p>
+                </div>
+                <!-- <div class="col-md-2"> endtime</div>
+                <div class="col-md-2">class</div> -->
+            </div>
+            <div class="border-container"></div>
+            <div class="row" style="margin: 2px 8px; padding: 5px;">
+                <div class="col" >
+                    check-in=30kg max
+                </div>
+            </div>
+        </div>
+       </div>
+
+    <div class="container-md  ">
+      <div class="row ">
+        <div  style="display: flex;">
+            <form action="payment"onsubmit="return book_submit()" method="POST">
+                {% csrf_token %}
+              
+                <div class="contact-info shadow-box p-3 justify-content-center bk">
+                    <h3 style="font-style: italic;">Contact-Info </h3>
+                    <div class="border-container"></div>
+                    <div class="makecentre">
+                    <div class="form-group " style=" width: 200px;">
+                        <label>country code:</label>
+                        <select class="form-control" id="countryDropdown" name="countrycode" > <!-- Adjust the width as needed -->
+                            <option value="" selected disabled>Select a country</option>
+                            <option value="us">United States (+1)</option>
+                            <option value="ind">India (+91)</option>
+                            <option value="uk">United Kingdom (+44)</option>
+                            <option value="au">Australia (+61)</option>
+                            <!-- Add more countries here -->
+                        </select>
+                    </div>
+            <div class="form-group p-2" style="width: 200px;">
+                <label for="email">email:</label>
+                <input type="email" id="email" name="email" placeholder="enter email" required>
+    
+            </div>
+            <div class="form-group p-2" style=" width: 200px;">
+    
+                <label for="Phone number">Phone number:</label>
+                <input type="text" id="phone" name="phone" placeholder="enter 10 digit number" pattern="[0-9]{10}" required>
+            </div>
+        </div>
+                </div>
+                <div  class="passenger-info shadow-box p-3 my-4 bk">
+                <h3 style="font-style: italic;">Passengers</h3>
+                <div class="border-container"></div>
+                <div class="makecentre">
+                <div id="passenger-container">
+                    <div class="passenger" style="margin-top: 3px;">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="passenger_name" placeholder="enter name" >
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="passenger_age" placeholder="enter age"><br>
+                        <div>
+                        <label>Gender:</label>
+                            <label for="passenger_male">Male</label>
+                            <input type="radio" id="passenger_male" name="passenger_gender" value="male">
+                        
+                            <label for="passenger_female">Female</label>
+                            <input type="radio" id="passenger_female" name="passenger_gender" value="female">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <button type="button" id="add"  style=" margin: 10px;">  + Add Passenger</button>
+                <br>
+                <!-- <div id="list"></div> -->
+                <br>
+                <div > <input type="hidden" id="totalfare" name="totalfare"value="0"></div>
+                <input type="hidden" name="flight_id" value="{{id}}">
+                <input type="hidden" name="origin" value="{{origin}}">
+                <input type="hidden" name="destination" value="{{destination}}">
+                <input type="hidden" name="starttime" value="{{arrivaltime}}">
+                <input type="hidden" name="endtime" value="{{departtime}}">
+                <input type="hidden" name="date" value="{{date}}">
+                <input type="hidden" name="day" value="{{day}}">
+                <input type="hidden" name="cost" value="{{price}}">
+                <input type="hidden" name="clas" value="{{clas}}">
+                <input type="hidden" id="nop" name="totalpassengers" value=0>
+                <button type="submit">Proceed to payment</button>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="col-4">
+    <div class="container-md shadow-box bk">
+        <h2 style="font-style: italic;">Fare</h2>
+        <div class="border-container"></div>
+        <div> <p style=" display: inline-block;">number of passengers : </p> <span id="no">0</span></div>
+        <!-- <br> -->
+        <div> <p style=" display: inline-block;">total fare : </p> <span>₹</span><span id="cost">0</span> </div>
+    </div>
+</div>
+    </div>
+</div>
+    
+
+    <script>
+        let addButton = document.getElementById("add");
+        let pname = document.getElementById("name");
+        let page = document.getElementById("age");
+        let passengerContainer = document.getElementById("passenger-container");
+        
+        let passengerCount = 0;
+        let noofp=document.getElementById("no")
+        let nop=document.getElementById("nop")
+        let cost=document.getElementById("cost")
+        let list=document.getElementById("list");
+        let fare=document.getElementById("totalfare")
+
+        var maleRadioButton = document.getElementById("passenger_male");
+        var femaleRadioButton = document.getElementById("passenger_female");
+      
+
+        addButton.addEventListener('click', function () {
+            if (maleRadioButton.checked || femaleRadioButton.checked){
+
+            
+          if(pname.value!=''&&page.value!='') {
+            passengerCount++;
+            let passengerDiv = document.createElement('div');
+            passengerDiv.className = "passenger";
+            let pgender
+        if (maleRadioButton.checked) {
+        pgender="male";
+    } else if (femaleRadioButton.checked) {
+        pgender="female";}
+            
+
+            
+            passengerDiv.innerHTML = `
+            <div>
+                            <span class="traveller-name">${pname.value} ${page.value} ${pgender} </span>
+                          
+                        </div>
+               
+                <input type="hidden" name="passenger_name${passengerCount}"  value="${pname.value}" required >
+               
+                <input type="hidden" name="passenger_age${passengerCount}"  value="${page.value}" required >
+                <input type="hidden" name="passenger_gender${passengerCount}"  value="${pgender}" required >
+            `;
+            pname.value='';
+            page.value='';
+            maleRadioButton.checked = false;
+            femaleRadioButton.checked = false;
+            
+
+            passengerContainer.appendChild(passengerDiv)
+            noofp.innerHTML= passengerCount
+            nop.value= passengerCount
+            cost.innerHTML=passengerCount*{{price}}
+          } 
+          else
+          alert('Please fill all details.');
+        }
+        else
+        alert('Please fill all details.');
+
+        
+        fare.value=passengerCount*{{price}}
+       
+
+        });
+        function book_submit() {
+           
+            if(parseInt(passengerCount) > 0) {
+                return true;
+            }
+            alert("Please add atleast one passenger.")
+            return false;
+        }
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure CSS Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-gray {
+            background-color: #f0f0f0;
+            color: #000000;
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .btn-download {
+            float: right;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-download:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        tr {
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            max-width: 15px; /* Set a maximum width for table cells */
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        td,th{
+            width: 25%;
+            /* background-color: black; */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-gray">
+        <table>
+            <tr>
+                <td style="width: 25%;"><h3>FLIGHT</h3></td>
+                <td style="width: 50%;"></td>
+                <td style="width: 25%;"><h3>E-Ticket</h3></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container-gray">
+        <h3>Important Information <h3>
+        This is your E-Ticket Itinerary. You must bring it to the airport for check-in, and it is recommended that you retain a copy for your records. <br>
+        Each passenger traveling needs a printed copy of this document for immigrations, customs, airport security checks, and duty-free purchases. <br>
+        Economy Class passengers should report to airline check-in desks 3 hours prior to the departure of all flights. First and Business Class passengers should report to airline check-in desks not later than 1 hour prior to departure. Boarding for your flight begins at least 35 minutes before your scheduled departure time. Gates close 15 minutes prior to departure.</p>
+    </div>
+
+    <h2 class="container-gray">Passenger Information</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>S NO</th>
+                <th>NAME</th>
+                <th>GENDER</th>
+                <th>AGE</th>
+            </tr>
+        </thead>
+        {%for p in passengerlist%}
+        <tbody>
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{p.name}}</td>
+                <td>MALE</td>
+                <td>{{p.age}}</td>
+            </tr>
+          
+        </tbody>
+        {%endfor%}
+    </table>
+
+    <h2 class="container-gray">Flight Information</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>FLIGHT</th>
+                <th>DEPART</th>
+                <th>ARRIVE</th>
+                <th>TERMINALS(DEPART&ARRIVE)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{id}}</td>
+                <td>{{origin}}</td>
+                <td>{{destination}}</td>
+                <td>1/2</td>
+            </tr>
+          
+        </tbody>
+    </table>
+
+
+<table>
+
+    <h2 class="container-gray">Ticket Info</h2>
+</table>
+    <table>
+       
+        <tr>
+            <td>TICKET REFERENCE :</td>
+            <td>{{ref_no | upper}}</td>
+            <td>BOOKING DATE :</td>
+            <td>{{booking_date}}</td>
+        </tr>
+        <tr>
+            <td>flight date</td>
+            <td>{{datee}}  </td>
+            <td>class</td>
+            <td>{{clas}}</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>{{email}}</td>
+            <td>mobile</td>
+            <td>{{phone}}</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>Done</td>
+            <!-- <td>Data 4-3</td>
+            <td>Data 4-4</td> -->
+        </tr>
+    </table>
+
+    <h2 class="container-gray">Fare Details</h2>
+    <table>
+        <tr>
+            <td>fare</td>
+            <td>{{totalfare}} Rs</td>
+        </tr>
+        <tr>
+            <td>charges</td>
+            <td>200 Rs</td>
+        </tr>
+        <tr>
+            <td>total</td>
+            <td>{{final}} Rs</td>
+        </tr>
+    </table>
+</body>
+</html> 
+
+

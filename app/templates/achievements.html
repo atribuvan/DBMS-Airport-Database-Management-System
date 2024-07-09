@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load static%}
+'
+{% block head %}
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+          margin-top: 0px;
+            text-align: center;
+        }
+
+        .background {
+            background-color: #f3f7fd;
+        }
+    </style>
+    {% endblock %}
+
+
+    {% block content %}
+    <main  class="background">
+        <section class=" container-fluid mt-0">
+            <div class="container">
+                <div class="row mb-3" style="margin-top:30px; text-align: center;">
+                    <h1 class="text-primary">Our Achievements</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{% static 'images/card1ach.jpg' %}" alt="image" class="card-img-top" />
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Achievement</h4>
+                                <p class="cardtext">Infinity has once again clinched the prestigious “National Energy Leader” and “Excellent Energy Efficient Unit” awards at the 24th National Award Ceremony for ‘Excellence in Energy Management’ organized by the Confederation of Indian Industry (CII). The airport has been recognized with "National Energy Leader" and "Excellent Energy Efficient Unit" laurels for 5th and 7th year in a row, respectively.
+                                </p>
+                                <a href="#" class="card-link" style="text-decoration: none;">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{% static 'images/card2ac.jpeg' %}" alt="image" class="card-img-top" />
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Achievement</h4>
+                                <p class="cardtext">Our Infinity has won Third Position under the Category Infrastructure & Construction under 18th National Awards for Excellence in Cost Management-2022 announced by The Institute of Cost Accountants of India
+                                </p>
+                                <a href="#" class="card-link" style="text-decoration: none;">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{% static 'images/card3ac.jpeg' %}" alt="image" class="card-img-top" />
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Achievement</h4>
+                                <p class="cardtext">Infinity announced that it has been awarded with Level 4+: Transition accreditation in recognition of its alignment with global climate goals in carbon management from the Airports Council International (ACI).
+                                </p>
+                                <a href="#" class="card-link" style="text-decoration: none;">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:150px ;"></div>
+
+            </div>
+        </section>
+
+    </main>
+    {% endblock %}
+ 
+    <!-- Add Bootstrap JavaScript Libraries here -->
+

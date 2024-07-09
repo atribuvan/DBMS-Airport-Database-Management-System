@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Ticket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .container-gray {
+            background-color: #f0f0f0;
+            color: #000000;
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container container-gray">
+        <div class="row">
+            <div class="col-3">
+                <h3>FLIGHT</h3>
+            </div>
+            <div class="col-6"></div>
+            <div class="col-3">
+                <h3>E-Ticket</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container container-gray">
+        <p>Important Information</p>
+        <p>
+            This is your E-Ticket Itinerary. You must bring it to the airport for check-in, and it is recommended that you retain a copy for your records.
+        </p>
+        <p>Each passenger traveling needs a printed copy of this document for immigrations, customs, airport security checks, and duty-free purchases.</p>
+        <p>Economy Class passengers should report to airline check-in desks 3 hours prior to the departure of all flights. First and Business Class passengers should report to airline check-in desks not later than 1 hour prior to departure. Boarding for your flight begins at least 35 minutes before your scheduled departure time. Gates close 15 minutes prior to departure.</p>
+    </div>
+    <div class="container container-gray">
+        <div class="row">
+            <p>Ticket Information</p>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <p>TICKET REFERENCE :</p>
+            </div>
+            <div class="col-3">{{ticket1.ref_no | upper}}</div>
+            <div class="col-3">BOOKING DATE :</div>
+            <div class="col-3">store it in db 
+                </div>
+        </div>
+        <div class ="row">
+            <div class="col-3">
+                <p>FLIGHT DATE :</p>
+            </div>
+            <div class="col-3">{{datee  }}</div>
+            <div class="col-3">CLASS :</div>
+            <div class="col-3">{{clas}}</div>
+        </div>
+        {% comment %} <tr>
+            <td>ticket ref</td>
+            <td>{{ticket1.ref_no | upper}}</td>
+            <td>booking date</td>
+            <td>13333</td>
+        </tr>
+        <tr>
+            <td>flight date</td>
+            <td>{{datee  }}</td>
+            <td>class</td>
+            <td>{{class}}</td>
+        </tr>
+        <tr>
+            <td>{{email}}</td>
+            <td>Data 3-2</td>
+            <td>mobile</td>
+            <td>{{phone}}</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>Done</td>
+            <td>hi</td>
+            <td>hi</td>
+        </tr> {% endcomment %}
+        <div class="row">
+            <div class="col-3">
+                <p>EMAIL</p>
+            </div>
+            <div class="col-3">{{email}}</div>
+            <div class="col-3">MOBILE</div>
+            <div class="col-3">
+                {{phone}}</div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <p>STATUS</p>
+            </div>
+            <div class="col-3">DONE</div>
+        </div>
+    </div>
+    <div class="container container-gray">
+        <div class="row">
+            <p>Passenger Information</p>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <p>SNO</p>
+            </div>
+            <div class="col-3">
+                <p>PASSENGER NAME</p>
+            </div>
+            <div class="col-3">
+                <p>GENDER</p>
+            </div>
+            <div class="col-3">
+                <p>AGE</p>
+            </div>
+        </div>
+        {%for p in passengerlist%}
+        <div class="row">
+            <div class="col-3">
+                <p>{{forloop.counter}}</p>
+            </div>
+            <div class="col-3">
+                <p>{{p.name}}</p>
+            </div>
+            <div class="col-3">
+                <p>MALE</p>
+            </div>
+            <div class="col-3">
+                <p>{{p.age}}</p>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    <div class="container container-gray">
+        <div class="row">
+            <p>Flight Info</p>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <p>FLIGHT</p>
+               
+            </div>
+            <div class="col-3">
+                <p>DEPART</p>
+            </div>
+            <div class="col-3">
+                <p> ARRIVE</p>
+            </div>
+            <div class="col-3">
+                <p> TERMINALS(DEPART&ARRIVE)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <p> {{id}}</p>
+            </div>
+            <div class="col-3">
+                <p>{{origin}}</p>
+            </div>
+            <div class="col-3">
+                <p>{{destination}}</p>
+            </div>
+            <div class="col-3">
+                <p>1/2</p>
+            </div>
+        </div>
+    </div>
+    <div class="container container-gray">
+        <div class="row">
+            <p>FARE TOTAL</p>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <p>fare :</p>
+            </div>
+            <div class="col-4">₹
+                {{totalfare}}</div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <p>charges :</p>
+            </div>
+            <div class="col-4">₹
+                0</div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <p>discount :</p>
+            </div>
+            <div class="col-4">0</div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <p>total :</p>
+            </div>
+            <div class="col-4">{{totalfare}}</div>
+        </div>
+    </div>
+    <div class="container container-gray">
+        <p>©2023 Flight Inc. All rights reserved.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

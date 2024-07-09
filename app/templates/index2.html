@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- Add custom CSS for styling -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 0;
+            margin: 0;
+        }
+
+        main {
+            padding-top: 0px;
+            text-align: center;
+        }
+
+        .background {
+            background: url({%static "images\security2.jpeg"%}) no-repeat center center ;
+            background-size: cover;
+            padding: 100px 0;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg  sticky-top" style=" background-color:rgb(50,66,168);opacity: 1;">
+
+            <div class="container ">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" ></span>
+                </button>
+                <a class="navbar-brand text-white" href="{% url 'home' %}">
+                    <img src="{% static 'images/logoblend1.png' %}" style="filter:invert(0)" alt="Logo" width="50" height="30"
+                        class="d-inline-block align-text-top"> <!-- Add filter to invert the logo to black -->
+                    <h3 class="d-inline-block">Infinity</h3>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link  text-white" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  text-white" href="#">My Bookings</a>
+                        </li>
+                        {% comment %} <li class="nav-item ">
+                            <a class="nav-link  text-white" href="{% url 'services' %}">Services</a>
+                        </li> {% endcomment %}
+                        <li class="nav-item">
+                            <a class="nav-link  text-white" href="{% url 'achievements' %}">Achievements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  text-white" href="{% url 'contact' %}">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="float: right;">
+                    <a class="navbar-brand text-white" href="{% url 'login' %}">Login</a>
+                    <span>
+                        <a class="navbar-brand text-white" href="{% url 'signup' %}">Signup</a>
+                    </span>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="container-fluid mt-0  background">
+            <div class="row ">
+                <div class="col-md-4 ">
+                    <div class="container-fluid mt-4">
+                        <div class="row text-white">
+                            <h1 class="text-white">Get Ready for</h1>
+                        </div>
+                        <div class="row text-white">
+                            <h1>Security</h1>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary">Check our tips</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 col-sm-6 bg-white">
+                    <form action="book" method="POST" class="mb-4">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <h2 class="text-primary mb-4">Find a flight</h2>
+                            <div class="form-group">
+                               
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="trip-type-1" id="one-way" value="one-way" onclick=f1() checked>
+                                    <label class="form-check-label" for="one-way">One-way</label>
+                                </div>
+                                {% comment %} <div class="form-check form-check-inline"> {% endcomment %}
+                                    <input class="form-check-input" type="radio" name="trip-type-2" id="round-trip" value="round-trip" onclick=f2()>
+                                    <label class="form-check-label" for="round-trip">Round-trip</label>
+                                {% comment %} </div> {% endcomment %}
+                            </div>
+                            <input type="text" id="departure" name="origin" class="form-control mb-4" required
+                                placeholder="From">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="destination" name="destination" class="form-control mb-4"
+                                placeholder="To" required>
+                        </div>
+                        <div class="form-group">
+                            {% comment %} <label for="class" class="text-primary">Select Class:</label> {% endcomment %}
+                            <select id="class" name="class" class="form-control mb-4" required>
+                                <option value="Economy">Economy</option>
+                                <option value="Business">Business</option>
+                                <option value="First">First Class</option>
+                            </select>
+                        </div>
+                      
+                        
+                        <div class="form-group">
+                            <input type="date" id="ddate" name="ddate" class="form-control mb-4" required>
+                        </div>
+                        <div id="date" ></div>
+                        <button type="submit" class="btn btn-primary">Search Flights</button>
+                    </form>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-md-4 col-sm-4">
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- add logo here -->
+                                </div>
+                                <div class="col">
+                                    <div class="card" style="border:none;">
+                                        <div class="card-body">
+                                            <div class="card-title ">
+                                                <a href="#" style="text-decoration: none;">
+                                                    <h3 class="text-primary">Park your car</h3>
+                                                </a>
+                                            </div>
+                                            <div class="card-text">
+                                                <p>Short term or long term parking, find the best spot</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="container-fluid">
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- add logo here -->
+                                </div>
+                                <div class="col">
+                                    <div class="card" style="border:none;">
+                                        <div class="card-body">
+                                            <div class="card-title ">
+                                                <a href="#" style="text-decoration: none;">
+                                                    <h3 class="text-primary">Make every visit unique</h3>
+                                                </a>
+                                            </div>
+                                            <div class="card-text">
+                                                <p>Come eat, drink, shop and relax</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- add logo here -->
+                                </div>
+                                <div class="col">
+                                    <div class="card" style="border:none;">
+                                        <div class="card-body">
+                                            <div class="card-title ">
+                                                <a href="#" style="text-decoration: none;">
+                                                    <h3 class="text-primary">Crowd levels</h3>
+                                                </a>
+                                            </div>
+                                            <div class="card-text">
+                                                <p>What time do you need to be at Infinity?</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row" style="text-align: left; ">
+                    <h2><b>Info for Infinity visitors</b></h2>
+                </div>
+                <div class="row text-dark">
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{% static 'images/card1.jpg' %}" alt="image" class="card-img-top" />
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Wear fitted clothing and low shoes</h4>
+                                <p class="cardtext">For a smoother security check, wear fitted clothing and low shoes.
+                                    That way, you won't have to take anything off.
+                                </p>
+                                <a href="#" class="card-link" style="text-decoration: none;">Check the dress code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{% static 'images/card2.jpeg' %}" alt="image" class="card-img-top" />
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">What's allowed in my hand baggage?</h4>
+                                <p class="cardtext">
+                                    Pack smart. Check what you're allowed to bring onto the plane and what
+                                    the rules are regarding liquids and electronics.
+                                </p>
+                                <a href="#" class="card-link" style="text-decoration: none;">How to pack smart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{% static 'images/card3.png' %}" alt="image" class="card-img-top" />
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Book a free timeslot</h4>
+                                <p class="cardtext">From now on, you can go through security at a time of your choice
+                                    as long as you reserve a time slot.
+                                </p>
+                                <a href="#" class="card-link" style="text-decoration: none;">Book now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="background-color:#f3f7fd;">
+            <div class="container">
+                <div class="row">
+                    <h1 style="text-align:left">Good to know</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{% static 'images/card4.jpg' %}" alt="image" class="card-image-top" />
+                            <div class="card-body">
+                                <h3 class="card-title text-primary">A hassle-free journey to Infinity</h3>
+                                <p class="card-text">
+                                    Are you travelling by plane at some point in the coming weeks?
+                                    Avoid traffic jams on the way and help us keep the airport accessible.
+                                </p>
+                                <a class="card-link" href="#" style="text-decoration: none;">Plan your trip</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{% static 'images/card5.jpg' %}" alt="image" class="card-image-top" />
+                            <div class="card-body">
+                                <h3 class="card-title text-primary">A hassle-free journey to Infinity</h3>
+                                <p class="card-text">
+                                    Here's a smart tip for when you want to go through passport
+                                    control more quickly:see if you can use the eGates where you can scan your
+                                    passport yourself.
+
+
+
+                                </p>
+                                <a class="card-link" href="#" style="text-decoration: none;">Check your passport</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{% static 'images/card6.jpeg' %}" alt="image" class="card-image-top" />
+                            <div class="card-body">
+                                <h3 class="card-title text-primary">All about your arrival at infinity</h3>
+                                <p class="card-text">
+                                    Your plane has landed and you arrive at the gate.Do you know how to get to the
+                                    baggage hall from the
+                                    plane and where to exit the airport?
+                                </p>
+                                <a class="card-link" href="#" style="text-decoration: none;">Read our useful tips</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-white mt-5" style="background-color:rgb(50,66,168)">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>About Us</h3>
+                    <p>Infinity Airlines is a leading provider of domestic and international flights. We aim to make
+                        your
+                        travel experience comfortable and enjoyable.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="search-results.html">Search</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Signup</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Contact Information</h3>
+                    <p>Email: info@yourairline.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Add Bootstrap JavaScript Libraries here -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+        crossorigin="anonymous"></script>
+        <script>
+            let btn=document.getElementById('one-way')
+            let btn1=document.getElementById('round-trip')
+            function f2(){
+                btn.checked=false
+                btn1.checked=true;
+
+
+
+                let x=document.getElementById('date')
+                x.innerHTML=`<div class="form-group">
+                <input type="date" id="date" name="return" class="form-control mb-4" required>
+                </div>`
+
+                
+                }
+
+                function f1(){
+                    btn1.checked=false
+                    btn.checked=true;
+                    let x=document.getElementById('date')
+                    x.innerHTML=``
+                }
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #00509e;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: linear-gradient(to right, #f06, #9f6);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            display:block; /* Display horizontally */
+            display:flex;
+            justify-content: space-between;
+            margin-right: 10px; /* Adjust spacing between items */
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(to right, #3d4444, #5a4475);
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block; /* Make it a block element */
+        }
+        .header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .return-btn {
+            background: linear-gradient(to right, #30cfd0, #330867);
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold; /* Added bold font weight for the button in the header */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Your Bookings</h1>
+        <a href="{% url 'home' %}" class="return-btn">Return to Main Menu</a>
+    </div>
+    <!-- <h1>Your Bookings</h1> -->
+    {% if tickets %}
+        
+            {% for ticket in tickets reversed %}
+            <ul >
+                <li >
+                    <strong>{{ forloop.counter }}</strong> <br>
+                    <strong>{{ ticket.flight }}</strong> <br>
+                     
+                    <strong>Date of Flight:<br>{{ ticket.flight_ddate }}</strong> <br>
+                    <strong>Duration of Flight:<br>{{ ticket.duration }}</strong> <br>
+                    <strong style="border: 1px solid #ccc; padding: 10px; background-color: {% if ticket.status == 'Confirmed' %}green{% elif ticket.status == 'Cancelled' %}red {% elif ticket.status == 'Pending' %}blue{% endif %};">{{ ticket.status }}</strong> <br>
+                    <a href="{% url 'ticket_detail' ticket.id %}" class="btn">View Details</a>
+                </li>
+            </ul>
+            {% endfor %}
+    {% else %}
+        <p>No bookings found.</p>
+    {% endif %}
+</body>
+</html>
